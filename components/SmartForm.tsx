@@ -1,0 +1,70 @@
+"use client";
+
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { FormEvent } from "react";
+
+async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  e.preventDefault();
+  const formData = new FormData(e.currentTarget as HTMLFormElement);
+
+  const response = await fetch("/api/booking", {
+    method: "POST",
+    body: formData,
+  });
+
+  const data = await response.json();
+}
+
+function SmartForm() {
+  return (
+    <form
+      className="mx-auto flex flex-col gap-6 min-w-2xl [&>input]:py-6.5 [&>input]:focus-visible:ring-0"
+      onSubmit={handleSubmit}
+    >
+      <Input type="text" placeholder="Nombre y apellido" name="fullname" />
+      <Input type="email" placeholder="Email" name="email" />
+      <Input type="number" placeholder="Phone" minLength={9} name="phone" />
+      <Input type="number" placeholder="Edad" min={13} name="age" />
+      <Input type="text" placeholder="Dolencia" name="ailment" />
+      <Input type="datetime-local" name="availability" />
+
+      <Select name="consultation">
+        <SelectTrigger className="w-45 py-6.5 bg-foreground text-white">
+          <SelectValue placeholder="Tipo de consulta" />
+        </SelectTrigger>
+        <SelectContent className="bg-background [&>div>div]:hover:bg-foreground [&>div>div]:hover:text-white">
+          <SelectItem value="urgency">Urgencia</SelectItem>
+          <SelectItem value="review">Revisión</SelectItem>
+          <SelectItem value="implants">Implantes</SelectItem>
+          <SelectItem value="cosmetic-dentistry">Estética dental</SelectItem>
+          <SelectItem value="other">Otros</SelectItem>
+        </SelectContent>
+      </Select>
+
+      <div className="[&>div]:flex [&>div]:flex-row [&>div]:gap-4 [&>div]:w-fit [&>div]:items-center">
+        <div>
+          <label htmlFor="">Si</label>
+          <Input type="checkbox" id="si" value={"yes"} />
+        </div>
+        <div>
+          <label htmlFor="">No</label>
+          <Input type="checkbox" id="no" value={"no"} />
+        </div>
+      </div>
+
+      <Button className="rounded-lg bg-blue-600 text-white font-bold py-7 px-4 w-40">
+        Enviar
+      </Button>
+    </form>
+  );
+}
+
+export default SmartForm;
