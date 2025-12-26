@@ -45,14 +45,14 @@ function SmartForm() {
           <SelectItem value="urgency">Urgencia</SelectItem>
           <SelectItem value="review">Revisión</SelectItem>
           <SelectItem value="implants">Implantes</SelectItem>
-          <SelectItem value="cosmetic-dentistry">Estética dental</SelectItem>
+          <SelectItem value="cosmetic_dentistry">Estética dental</SelectItem>
           <SelectItem value="other">Otros</SelectItem>
         </SelectContent>
       </Select>
 
       <div className="[&>div]:flex [&>div]:flex-row [&>div]:gap-4 [&>div]:w-fit [&>div]:items-center">
-        <Checkbox id="yes" value="yes" label="Sí" />
-        <Checkbox id="no" value="no" label="No" />
+        <Checkbox name="pain" id="yes" value="yes" label="Sí" />
+        <Checkbox name="pain" id="no" value="no" label="No" />
       </div>
 
       <Button className="rounded-lg bg-blue-600 text-white font-bold py-7 px-4 w-40">
