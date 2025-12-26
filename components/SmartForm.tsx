@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { FormEvent } from "react";
+import Checkbox from "./Checkbox";
 
 async function handleSubmit(e: FormEvent<HTMLFormElement>) {
   e.preventDefault();
@@ -20,7 +21,7 @@ async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     body: formData,
   });
 
-  const data = await response.json();
+  await response.json();
 }
 
 function SmartForm() {
@@ -37,7 +38,7 @@ function SmartForm() {
       <Input type="datetime-local" name="availability" />
 
       <Select name="consultation">
-        <SelectTrigger className="w-45 py-6.5 bg-foreground text-white">
+        <SelectTrigger className="w-45 py-6.5 bg-foreground text-white focus-visible:ring-0">
           <SelectValue placeholder="Tipo de consulta" />
         </SelectTrigger>
         <SelectContent className="bg-background [&>div>div]:hover:bg-foreground [&>div>div]:hover:text-white">
@@ -50,14 +51,8 @@ function SmartForm() {
       </Select>
 
       <div className="[&>div]:flex [&>div]:flex-row [&>div]:gap-4 [&>div]:w-fit [&>div]:items-center">
-        <div>
-          <label htmlFor="">Si</label>
-          <Input type="checkbox" id="si" value={"yes"} />
-        </div>
-        <div>
-          <label htmlFor="">No</label>
-          <Input type="checkbox" id="no" value={"no"} />
-        </div>
+        <Checkbox id="yes" value="yes" label="Sí" />
+        <Checkbox id="no" value="no" label="No" />
       </div>
 
       <Button className="rounded-lg bg-blue-600 text-white font-bold py-7 px-4 w-40">
