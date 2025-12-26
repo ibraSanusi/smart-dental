@@ -5,7 +5,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="dashboard-layout">
+    <section className="h-screen w-screen grid place-content-center">
       <main>{children}</main>
     </section>
   );
