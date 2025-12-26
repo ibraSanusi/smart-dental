@@ -1,9 +1,9 @@
 import Image from "next/image";
-import SmartForm from "../components/SmartForm";
+import SmartForm from "../../components/SmartForm";
 
 export default function Home() {
   return (
-    <main className="w-full">
+    <>
       <section className="h-screeen w-full max-w-360 mx-auto flex flex-row [&>div]:flex-1 p-8">
         <div className="gap-8 flex flex-col justify-center">
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance">
@@ -31,6 +31,6 @@ export default function Home() {
         <SmartForm />
       </section>
       <section></section>
-    </main>
+    </>
   );
 }
