@@ -1,6 +1,6 @@
 import { BookingFormRaw } from "@/lib/booking/interfaces";
 import { NextRequest } from "next/server";
-import { saveBooking } from "../services/bookingServices";
+import { fetchBookings, saveBooking } from "../services/bookingServices";
 
 export async function createBooking(request: NextRequest) {
   const formData = await request.formData();
@@ -29,5 +29,13 @@ export async function createBooking(request: NextRequest) {
 
   const { error } = await saveBooking(payload);
 
-  if (error) throw new Error("No se ha podido crear la reserva");
+  if (error) throw new Error("No se ha podido crear la reserva.");
+}
+
+export async function getBookings() {
+  const { error, data } = await fetchBookings();
+
+  if (error) throw new Error("No se ha podido recuperar reservas.");
+
+  return data;
 }

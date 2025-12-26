@@ -7,3 +7,16 @@ export interface BookingFormRaw {
   availability: Date;
   consultation: string;
 }
+
+export interface Booking {
+  id: number;
+  fullname: string;
+  email: string | null;
+  phone: number;
+  contact_source: string | null;
+  ailment: string;
+  availability: Date;
+  status: string;
+  consultation: string;
+  priority?: string;
+}
