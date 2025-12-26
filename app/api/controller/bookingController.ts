@@ -14,7 +14,7 @@ export async function createBooking(request: NextRequest) {
   const consultation = formData.get("consultation") as string | null;
 
   if (!fullname || !phone || !ailment || !availability || !consultation) {
-    return null;
+    throw new Error("No se ha podido crear la reserva. Faltan datos");
   }
 
   const payload: BookingFormRaw = {
