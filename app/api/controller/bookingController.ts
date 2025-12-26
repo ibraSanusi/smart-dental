@@ -35,7 +35,7 @@ export async function createBooking(request: NextRequest) {
 export async function getBookings() {
   const { error, data } = await fetchBookings();
 
-  if (error) throw new Error("No se ha podido recuperar reservas.");
+  if (error) throw new Error("No se han podido recuperar reservas.");
 
   return data;
 }
