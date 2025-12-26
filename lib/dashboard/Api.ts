@@ -1,3 +1,5 @@
+import { Booking } from "../booking/interfaces";
+
 export class Api {
   static async request(url: string, headers?: RequestInit) {
     const response = await fetch(`/api${url}`, { ...headers });
@@ -6,7 +8,8 @@ export class Api {
     return await response.json();
   }
 
-  public static async getBookings() {
-    return await this.request("/booking");
+  public static async getBookings(): Promise<Booking[]> {
+    const result = await this.request("/booking");
+    return result.data;
   }
 }

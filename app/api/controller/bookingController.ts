@@ -12,6 +12,7 @@ export async function createBooking(request: NextRequest) {
   const ailment = formData.get("ailment") as string | null;
   const availability = formData.get("availability") as Date | null;
   const consultation = formData.get("consultation") as string | null;
+  const pain = formData.get("pain") === "yes" ? true : false;
 
   if (!fullname || !phone || !ailment || !availability || !consultation) {
     throw new Error("No se ha podido crear la reserva. Faltan datos");
@@ -25,6 +26,7 @@ export async function createBooking(request: NextRequest) {
     ailment,
     availability,
     consultation,
+    pain,
   };
 
   const { error } = await saveBooking(payload);

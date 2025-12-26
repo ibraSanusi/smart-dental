@@ -6,6 +6,7 @@ export interface BookingFormRaw {
   ailment: string;
   availability: Date;
   consultation: string;
+  pain: boolean;
 }
 
 export interface Booking {
@@ -19,4 +20,6 @@ export interface Booking {
   status: string;
   consultation: string;
   priority?: string;
+  pain: boolean;
+  created_at: Date;
 }

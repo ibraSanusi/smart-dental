@@ -10,9 +10,11 @@ function DashboardPage() {
   const [bookings, setBookings] = useState<Booking[]>();
   useEffect(() => {
     (async () => {
-      const bookingResult = await Api.getBookings();
-      const data = computePriority(bookingResult.data);
-      setBookings(data);
+      const bookingsResult = await Api.getBookings();
+      const prioriciedBookings = bookingsResult.map((booking) => {
+        return computePriority(booking);
+      });
+      setBookings(prioriciedBookings);
     })();
   }, []);
 
