@@ -1,5 +1,6 @@
 "use client";
 
+import Table from "@/components/Table";
 import { Booking } from "@/lib/booking/interfaces";
 import { Api } from "@/lib/dashboard/Api";
 import { computePriority } from "@/lib/dashboard/utils";
@@ -17,31 +18,7 @@ function DashboardPage() {
 
   if (!bookings) return <div>No hay datos aún...</div>;
 
-  return (
-    <table>
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Tipo</th>
-          <th>Prioridad</th>
-          <th>Canal</th>
-          <th>Estado</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {bookings.map((booking) => (
-          <tr key={booking.id}>
-            <td>{booking.fullname}</td>
-            <td>{booking.consultation}</td>
-            <td>{booking.priority ?? "-"}</td>
-            <td>{booking.contact_source}</td>
-            <td>{booking.status}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
+  return <Table bookings={bookings} />;
 }
 
 export default DashboardPage;
