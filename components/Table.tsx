@@ -12,40 +12,33 @@ interface Props {
 
 function Table({ data, onSort }: Props) {
   return (
-    <table className="border-2 border-black w-3xl h-151 overflow-x-hidden overflow-y-scroll">
-      <thead>
-        <tr className="*:py-2 *:px-4 *:text-start bg-blue-400">
-          <th>Nombre</th>
-          <th>Tipo</th>
-          <th>
-            <button onClick={onSort}>Prioridad</button>
-          </th>
-          <th>Canal</th>
-          <th>Estado</th>
-        </tr>
-      </thead>
+    <div className="h-151 overflow-y-auto overflow-x-hidden w-3xl border-2 border-black relative">
+      <table className="w-full">
+        <thead className="sticky top-0">
+          <tr className="*:py-2 *:px-4 bg-blue-400">
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>
+              <button onClick={onSort}>Prioridad</button>
+            </th>
+            <th>Canal</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        {data.map(
-          ({
-            id,
-            fullname,
-            consultation,
-            priority,
-            contact_source,
-            status,
-          }) => (
-            <tr className="*:py-2 *:px-4" key={id}>
-              <td>{fullname}</td>
-              <td>{consultationTranslations[consultation]}</td>
-              <td>{priorityTranslations[priority ?? "low"]}</td>
-              <td>{contact_source}</td>
-              <td>{statusTranslations[status]}</td>
+        <tbody>
+          {data.map((booking) => (
+            <tr key={booking.id} className="*:py-2 *:px-4">
+              <td>{booking.fullname}</td>
+              <td>{consultationTranslations[booking.consultation]}</td>
+              <td>{priorityTranslations[booking.priority ?? "low"]}</td>
+              <td>{booking.contact_source}</td>
+              <td>{statusTranslations[booking.status]}</td>
             </tr>
-          )
-        )}
-      </tbody>
-    </table>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
