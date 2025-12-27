@@ -6,6 +6,12 @@ import { Api } from "@/lib/dashboard/Api";
 import { computePriority } from "@/lib/dashboard/utils";
 import { useEffect, useState } from "react";
 
+const priorityOrder: Record<string, number> = {
+  high: 1,
+  medium: 2,
+  low: 3,
+};
+
 function DashboardPage() {
   const [bookings, setBookings] = useState<Booking[]>();
   useEffect(() => {
@@ -20,7 +26,14 @@ function DashboardPage() {
 
   if (!bookings) return <div>No hay datos aún...</div>;
 
-  return <Table bookings={bookings} />;
+  const handleSorting = () => {
+    const result = [...bookings].sort(
+      (a, b) => priorityOrder[a.priority ?? 0] - priorityOrder[b.priority ?? 0]
+    );
+    setBookings(result);
+  };
+
+  return <Table onSort={handleSorting} data={bookings} />;
 }
 
 export default DashboardPage;
