@@ -6,9 +6,9 @@ export const statusTranslations: Record<string, string> = {
 };
 
 export const priorityTranslations: Record<string, string> = {
-  high: "Alta",
-  medium: "Media",
-  low: "Baja",
+  high: "🔴 Alta",
+  medium: "🟡 Media",
+  low: "🟢 Baja",
 };
 
 export const consultationTranslations: Record<string, string> = {

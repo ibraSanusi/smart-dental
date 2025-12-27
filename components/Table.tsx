@@ -34,7 +34,7 @@ function Table({ bookings }: Props) {
             <tr className="*:py-2 *:px-4" key={id}>
               <td>{fullname}</td>
               <td>{consultationTranslations[consultation]}</td>
-              <td>{priority ?? "-"}</td>
+              <td>{priorityTranslations[priority ?? "low"]}</td>
               <td>{contact_source}</td>
               <td>{statusTranslations[status]}</td>
             </tr>
