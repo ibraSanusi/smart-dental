@@ -17,7 +17,7 @@ export interface Booking {
   contact_source: string | null;
   ailment: string;
   availability: Date;
-  status: string;
+  status: "new" | "contacted" | "scheduled_appointment" | "not_interested";
   consultation: string;
   priority?: string;
   pain: boolean;
