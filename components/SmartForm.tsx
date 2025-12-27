@@ -11,17 +11,24 @@ import {
 import { Button } from "@/components/ui/button";
 import { FormEvent } from "react";
 import Checkbox from "./Checkbox";
+import confetti from "canvas-confetti";
 
 async function handleSubmit(e: FormEvent<HTMLFormElement>) {
   e.preventDefault();
-  const formData = new FormData(e.currentTarget as HTMLFormElement);
+  const form = e.currentTarget;
+  const formData = new FormData(form as HTMLFormElement);
 
   const response = await fetch("/api/booking", {
     method: "POST",
     body: formData,
   });
 
+  if (!response.ok) return;
+
   await response.json();
+  confetti();
+
+  form.reset();
 }
 
 function SmartForm() {
