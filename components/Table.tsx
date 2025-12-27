@@ -4,15 +4,21 @@ import {
   statusTranslations,
   priorityTranslations,
 } from "@/lib/dashboard/translations";
+import WhatsappButton from "./WhatsappButton";
+import PhoneButton from "./PhoneButton";
 
 interface Props {
   data: Booking[];
   onSort: () => void;
 }
 
+const phone = "34631752039";
+const message =
+  "Hola Ana, te escribimos desde la clínica dental. Hemos recibido tu solicitud para una consulta. ¿Podemos hablar?";
+
 function Table({ data, onSort }: Props) {
   return (
-    <div className="h-151 overflow-y-auto overflow-x-hidden w-3xl border-2 border-black relative">
+    <div className="h-151 overflow-y-auto overflow-x-hidden w-5xl border-2 border-black relative">
       <table className="w-full">
         <thead className="sticky top-0">
           <tr className="*:py-2 *:px-4 bg-blue-400">
@@ -34,6 +40,12 @@ function Table({ data, onSort }: Props) {
               <td>{priorityTranslations[booking.priority ?? "low"]}</td>
               <td>{booking.contact_source}</td>
               <td>{statusTranslations[booking.status]}</td>
+              <td>
+                <div className="py-4 space-x-4">
+                  <WhatsappButton phone={phone} message={message} />
+                  <PhoneButton phone={phone} message={message} />
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>

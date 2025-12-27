@@ -23,3 +23,8 @@ export interface Booking {
   pain: boolean;
   created_at: Date;
 }
+
+export interface ContactProps {
+  phone: string;
+  message: string;
+}
