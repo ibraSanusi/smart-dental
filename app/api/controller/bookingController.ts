@@ -1,6 +1,10 @@
 import { BookingFormRaw } from "@/lib/booking/interfaces";
 import { NextRequest } from "next/server";
-import { fetchBookings, saveBooking } from "../services/bookingServices";
+import {
+  fetchBookings,
+  saveBooking,
+  updateStatus,
+} from "../services/bookingServices";
 
 export async function createBooking(request: NextRequest) {
   const formData = await request.formData();
@@ -38,6 +42,16 @@ export async function getBookings() {
   const { error, data } = await fetchBookings();
 
   if (error) throw new Error("No se han podido recuperar reservas.");
+
+  return data;
+}
+
+export async function updateBookingStatus(request: NextRequest) {
+  const { bookingId, statusText } = await request.json();
+  const { error, data } = await updateStatus(bookingId, statusText);
+
+  if (error)
+    throw new Error("No se ha podido cambiar el status de la reserva.");
 
   return data;
 }

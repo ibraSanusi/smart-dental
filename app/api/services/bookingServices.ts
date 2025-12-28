@@ -8,3 +8,13 @@ export async function saveBooking(payload: BookingFormRaw) {
 export async function fetchBookings() {
   return await supabase.from("booking").select("*");
 }
+
+export async function updateStatus(bookingId: number, statusText: string) {
+  console.log({ bookingId, statusText });
+
+  return await supabase
+    .from("booking")
+    .update({ status: statusText })
+    .eq("id", bookingId)
+    .select();
+}

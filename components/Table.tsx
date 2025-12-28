@@ -4,8 +4,9 @@ import {
   statusTranslations,
   priorityTranslations,
 } from "@/lib/dashboard/translations";
-import WhatsappButton from "./WhatsappButton";
-import PhoneButton from "./PhoneButton";
+import { contactViaWhatsapp } from "@/lib/dashboard/whatsapp";
+import { WhatsApp } from "./ui/WhatsappIcon";
+import { PhoneIcon } from "lucide-react";
 
 interface Props {
   data: Booking[];
@@ -21,7 +22,7 @@ function Table({ data, onSort }: Props) {
     <div className="h-151 overflow-y-auto overflow-x-hidden w-5xl border-2 border-black relative">
       <table className="w-full">
         <thead className="sticky top-0">
-          <tr className="*:py-2 *:px-4 bg-blue-400">
+          <tr className="*:py-2 *:px-4 bg-blue-400 *:text-start">
             <th>Nombre</th>
             <th>Tipo</th>
             <th>
@@ -29,6 +30,7 @@ function Table({ data, onSort }: Props) {
             </th>
             <th>Canal</th>
             <th>Estado</th>
+            <th></th>
           </tr>
         </thead>
 
@@ -42,8 +44,22 @@ function Table({ data, onSort }: Props) {
               <td>{statusTranslations[booking.status]}</td>
               <td>
                 <div className="py-4 space-x-4">
-                  <WhatsappButton phone={phone} message={message} />
-                  <PhoneButton phone={phone} message={message} />
+                  <button
+                    className="size-6"
+                    onClick={() =>
+                      contactViaWhatsapp(
+                        phone,
+                        message,
+                        booking.id,
+                        "contacted"
+                      )
+                    }
+                  >
+                    <WhatsApp />
+                  </button>
+                  <button className="size-6">
+                    <PhoneIcon />
+                  </button>
                 </div>
               </td>
             </tr>
