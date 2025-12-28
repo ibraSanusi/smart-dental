@@ -28,3 +28,8 @@ export interface ContactProps {
   phone: string;
   message: string;
 }
+
+export interface UpdateBookingStatusProps {
+  bookingId: number;
+  statusText: string;
+}

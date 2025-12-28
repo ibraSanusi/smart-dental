@@ -1,23 +1,39 @@
-import { Booking } from "@/lib/booking/interfaces";
+import { Booking, UpdateBookingStatusProps } from "@/lib/booking/interfaces";
 import {
   consultationTranslations,
   statusTranslations,
   priorityTranslations,
 } from "@/lib/dashboard/translations";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { contactViaWhatsapp } from "@/lib/dashboard/whatsapp";
 import { WhatsApp } from "./ui/WhatsappIcon";
-import { PhoneIcon } from "lucide-react";
+import { EllipsisIcon, PhoneIcon } from "lucide-react";
+import { Api } from "@/lib/dashboard/Api";
 
 interface Props {
   data: Booking[];
   onSort: () => void;
 }
 
-const phone = "34631752039";
-const message =
-  "Hola Ana, te escribimos desde la clínica dental. Hemos recibido tu solicitud para una consulta. ¿Podemos hablar?";
-
 function Table({ data, onSort }: Props) {
+  const message = (name: string) => {
+    return `Hola ${name}, te escribimos desde la clínica dental. Hemos recibido tu solicitud para una consulta. ¿Podemos hablar?`;
+  };
+
+  const handleSelectChange = async ({
+    bookingId,
+    statusText,
+  }: UpdateBookingStatusProps) => {
+    const result = await Api.updateBookingStatus({ bookingId, statusText });
+
+    if (!result) return null;
+  };
   return (
     <div className="h-151 overflow-y-auto overflow-x-hidden w-5xl border-2 border-black relative">
       <table className="w-full">
@@ -30,7 +46,8 @@ function Table({ data, onSort }: Props) {
             </th>
             <th>Canal</th>
             <th>Estado</th>
-            <th></th>
+            <th>Contacto</th>
+            <th>Ajustes</th>
           </tr>
         </thead>
 
@@ -48,8 +65,8 @@ function Table({ data, onSort }: Props) {
                     className="size-6"
                     onClick={() =>
                       contactViaWhatsapp(
-                        phone,
-                        message,
+                        `34${booking.phone}`,
+                        message(booking.fullname),
                         booking.id,
                         "contacted"
                       )
@@ -61,6 +78,31 @@ function Table({ data, onSort }: Props) {
                     <PhoneIcon />
                   </button>
                 </div>
+              </td>
+              <td>
+                <Select
+                  onValueChange={(value) =>
+                    handleSelectChange({
+                      bookingId: booking.id,
+                      statusText: value,
+                    })
+                  }
+                  name="consultation"
+                >
+                  <SelectTrigger className="w-45 py-6.5 bg-foreground text-white focus-visible:ring-0">
+                    <SelectValue placeholder="Cambiar estados" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-background [&>div>div]:hover:bg-foreground [&>div>div]:hover:text-white">
+                    <SelectItem value="new">Nuevo</SelectItem>
+                    <SelectItem value="contacted">Contactado</SelectItem>
+                    <SelectItem value="scheduled_appointment">
+                      Cita agendada
+                    </SelectItem>
+                    <SelectItem value="not_interested">
+                      No interesado
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
               </td>
             </tr>
           ))}

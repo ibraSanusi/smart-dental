@@ -1,4 +1,5 @@
 import confetti from "canvas-confetti";
+import { Api } from "./Api";
 
 export async function contactViaWhatsapp(
   phone: string,
@@ -8,12 +9,9 @@ export async function contactViaWhatsapp(
 ) {
   const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
   //   window.open(url, "_blank");
-  const response = await fetch("/api/booking", {
-    method: "PUT",
-    body: JSON.stringify({ bookingId, statusText }),
-  });
+  const result = await Api.updateBookingStatus({ bookingId, statusText });
 
-  if (!response.ok) return null;
+  if (!result) return null;
 
   confetti();
 }
