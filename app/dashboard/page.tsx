@@ -28,7 +28,8 @@ function DashboardPage() {
 
   const handleSorting = () => {
     const result = [...bookings].sort(
-      (a, b) => priorityOrder[a.priority ?? 0] - priorityOrder[b.priority ?? 0]
+      (a, b) =>
+        priorityOrder[a.priority ?? "low"] - priorityOrder[b.priority ?? "low"]
     );
     setBookings(result);
   };
