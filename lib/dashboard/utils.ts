@@ -1,7 +1,8 @@
 import { Booking } from "@/lib/booking/interfaces";
 
 export function computePriority(data: Booking) {
-  const { consultation, pain, ailment, availability, created_at } = data;
+  const { consultation, pain, ailment, availability, created_at, status } =
+    data;
 
   console.log({ consultation, pain, ailment, availability, created_at });
 
@@ -11,14 +12,16 @@ export function computePriority(data: Booking) {
     consultation === "urgency" &&
     pain &&
     ailment.includes("sangre") &&
-    new Date(created_at).getHours() > new Date().getHours() - 10
+    new Date(created_at).getHours() > new Date().getHours() - 10 &&
+    status !== "contacted"
   )
     data = { ...data, priority: "high" };
   if (
     ["implants", "cosmetic_dentistry", "orthodontics"].includes(consultation) &&
     !pain &&
     availability &&
-    created_at.getHours() > new Date().getHours() - 10
+    created_at.getHours() > new Date().getHours() - 10 &&
+    status !== "contacted"
   )
     data = { ...data, priority: "medium" };
 
