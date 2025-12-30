@@ -7,21 +7,25 @@ export default function Home() {
       <section className="h-screeen w-full max-w-360 mx-auto flex flex-row [&>div]:flex-1 p-8">
         <div className="gap-8 flex flex-col justify-center">
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance">
-            Tu clinica dental
+            Tu clínica dental de confianza
           </h1>
           <p className="max-w-[60ch]">
-            Para los que os huele la boca a vaca, esta es tu clinica. Rellena
-            tus datos, no seas tonto. Queremos saber que necesitas y ayudarte a
-            limpiar ese inodoro que tienes por boca 🦷
+            En nuestra clínica dental te ayudamos a resolver tu problema de
+            forma clara y profesional.
+          </p>
+          <p className="max-w-[60ch]">
+            Cuéntanos qué necesitas y nuestro equipo se pondrá en contacto
+            contigo para valorar tu caso y ofrecerte la mejor solución.
           </p>
         </div>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center rounded-2xl">
           <Image
+            className="rounded-2xl"
             src={"/images/hero.jpg"}
             width={400}
             height={100}
-            alt="Imagen de tipo sonriendo"
+            alt="Imagen del paciente (opcional)"
             loading="lazy"
           />
         </div>
