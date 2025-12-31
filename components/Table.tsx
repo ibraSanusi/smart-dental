@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { contactViaWhatsapp } from "@/lib/dashboard/whatsapp";
 import { WhatsApp } from "./ui/WhatsappIcon";
-import { EllipsisIcon, PhoneIcon } from "lucide-react";
+import { PhoneIcon } from "lucide-react";
 import { Api } from "@/lib/dashboard/Api";
 
 interface Props {
@@ -62,7 +62,6 @@ function Table({ data, onSort }: Props) {
               <td>
                 <div className="py-4 space-x-4">
                   <button
-                    className="size-6"
                     onClick={() =>
                       contactViaWhatsapp(
                         `34${booking.phone}`,
@@ -72,10 +71,7 @@ function Table({ data, onSort }: Props) {
                       )
                     }
                   >
-                    <WhatsApp />
-                  </button>
-                  <button className="size-6">
-                    <PhoneIcon />
+                    <WhatsApp className="size-6" />
                   </button>
                 </div>
               </td>
